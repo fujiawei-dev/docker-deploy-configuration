@@ -1,0 +1,13 @@
+[user]
+	email = gitea@fake.local
+	name = Gitea
+[core]
+	quotePath = false
+	commitGraph = true
+[receive]
+	advertisePushOptions = true
+	procReceiveRefs = refs/for
+[gc]
+	writeCommitGraph = true
+# [http "https://github.com"]
+# 	proxy = http://172.17.0.1:8118

@@ -1,0 +1,25 @@
+version: "3"
+
+networks:
+  gitea:
+    external: false
+
+services:
+  server:
+    image: gitea/gitea:latest
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    restart: unless-stopped
+    networks:
+      - gitea
+    volumes:
+      - /mnt/ubuntu.old/root/dockerd/gitea:/data
+      - $PWD/conf.ini:/data/gitea/conf/app.ini
+      - $PWD/.gitconfig:/data/git/.gitconfig
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "13000:3000"
+      - "10022:22"

@@ -1,0 +1,35 @@
+version: "2.1"
+
+networks:
+  dockerhub:
+
+services:
+  # -----------------------------
+  redis:
+    restart: unless-stopped
+    image: redis:latest
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - dockerhub
+
+  # -----------------------------
+  registry:
+    restart: unless-stopped
+    image: registry:latest
+    ports:
+      - 5000:5000
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - $PWD/config.yml:/etc/docker/registry/config.yml:ro # 配置
+      - /mnt/ubuntu.old/root/dockerd/docker-registry:/var/lib/registry # 数据
+    networks:
+      - dockerhub
+    logging:
+        driver: "journald"
+        options:
+          tag: "docker-registry"
+
+  # -----------------------------

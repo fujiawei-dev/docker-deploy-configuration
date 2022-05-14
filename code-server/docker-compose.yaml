@@ -1,0 +1,21 @@
+version: "2.1"
+
+services:
+  code-server:
+    image: linuxserver/code-server:latest
+    container_name: code-server
+    restart: unless-stopped
+    environment:
+      - PUID=0 #root 权限
+      - PGID=0
+      - TZ=Asia/Shanghai
+      - PASSWORD=root #optional
+      - SUDO_PASSWORD=root #optional
+      - PROXY_DOMAIN=localhost/vscode/ #optional
+      - DEFAULT_WORKSPACE=/root/projects/docker-conf #optional
+    volumes:
+      - /mnt/ubuntu.old/root/dockerd/code-server/config:/config
+      - /root:/root
+      - $PWD/config.yaml:/config/.config/code-server/config.yaml
+    ports:
+      - 8443:8443

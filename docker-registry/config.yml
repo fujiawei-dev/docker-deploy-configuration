@@ -1,0 +1,38 @@
+version: 0.1
+log:
+    level: error
+storage:
+    delete:
+        enabled: true
+    cache:
+        blobdescriptor: redis
+    filesystem:
+        rootdirectory: /var/lib/registry
+    maintenance:
+        uploadpurging:
+            enabled: false
+http:
+    addr: :5000
+    debug:
+        addr: 127.0.0.1:5001
+    headers:
+        X-Content-Type-Options: [nosniff]
+health:
+    storagedriver:
+        enabled: true
+        interval: 10s
+        threshold: 3
+
+proxy:
+    # remoteurl: https://lgkewcn0.mirror.aliyuncs.com # 稳定但更新不及时
+    # remoteurl: https://hub-mirror.c.163.com # 更新及时但拉多了限速
+
+    # remoteurl: https://05f073ad3c0010ea0f4bc00b7105ec20.mirror.swr.myhuaweicloud.com
+    remoteurl: https://ba0d43c4ea0f4de5a5528e288a251804.mirror.swr.myhuaweicloud.com
+
+    # remoteurl: https://registry-1.docker.io
+    # username: rustlekarl
+    # password: Rk@1998.Dh
+
+redis:
+    addr: redis:6379
