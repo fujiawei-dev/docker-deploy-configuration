@@ -1,0 +1,43 @@
+version: "3"
+
+networks:
+  backup:
+
+services:
+  # -----------------------------
+  syncthing-master:
+    image: syncthing/syncthing
+    hostname: syncthing-master
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /mnt/ubuntu.old/root/dockerd/syncthing/master:/var/syncthing
+      - /mnt/linux.backup:/backup
+    ports:
+      - 8384:8384 # Web UI
+      - 22000:22000/tcp # TCP file transfers
+      - 22000:22000/udp # QUIC file transfers
+      - 21027:21027/udp # Receive local discovery broadcasts
+    networks:
+      - backup
+
+  # -----------------------------
+  syncthing-slave:
+    image: syncthing/syncthing
+    hostname: syncthing-slave
+    restart: unless-stopped
+    environment:
+      - PUID=0
+      - PGID=0
+    volumes:
+      - /mnt/ubuntu.old/root/dockerd/syncthing/slave:/var/syncthing
+      - /:/backup
+    ports:
+      - 8385:8384 # Web UI
+      - 22001:22000/tcp # TCP file transfers
+      - 22001:22000/udp # QUIC file transfers
+      - 21028:21027/udp # Receive local discovery broadcasts
+    networks:
+      - backup
