@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  nextcloud:
+    image: nextcloud
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - /mnt/ubuntu.old/root/dockerd/nextcloud:/var/www/html
+    environment:
+      - MYSQL_HOST=172.17.0.1
+      - MYSQL_PASSWORD=root
+      - MYSQL_USER=root
+      - MYSQL_DATABASE=Nextcloud
