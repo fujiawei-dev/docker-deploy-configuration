@@ -5,3 +5,19 @@
 ```shell
 docker compose up -d
 ```
+
+## 桌面客户端
+
+### Windows
+
+```shell
+choco install netcloud
+```
+
+### Ubuntu
+
+```shell
+add-apt-repository ppa:nextcloud-devs/client
+apt update
+apt install -y nextcloud-client
+```
