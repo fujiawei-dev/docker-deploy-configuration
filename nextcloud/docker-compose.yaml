@@ -8,6 +8,7 @@ services:
       - 8080:80
     volumes:
       - /mnt/ubuntu.old/root/dockerd/nextcloud:/var/www/html
+      - /mnt/linux.backup/dockerd/nextcloud/data:/var/www/html/data
     environment:
       - MYSQL_HOST=172.17.0.1
       - MYSQL_PASSWORD=root
