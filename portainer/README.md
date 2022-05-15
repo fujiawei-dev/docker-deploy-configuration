@@ -19,3 +19,10 @@ docker run -d -p 8000:8000 -p 9443:9443 --name portainer \
     -v /mnt/dockerd/portainer:/data \
     portainer/portainer-ce:latest
 ```
+
+## 用户名密码
+
+```shell
+root
+1234567890-=
+```

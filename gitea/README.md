@@ -13,3 +13,5 @@ docker compose up -d
 ```shell
 docker logs -f -n 10 gitea
 ```
+
+MySQL 太慢了。。。
