@@ -1,0 +1,32 @@
+:80
+
+@websockets {
+	header Connection *Upgrade*
+	header Upgrade websocket
+}
+
+handle_path /gitea/* {
+    reverse_proxy 127.0.0.1:13000
+}
+
+handle_path /vscode/* {
+    reverse_proxy 127.0.0.1:8443
+}
+
+handle_path /teamcity/* {
+    reverse_proxy @websockets 127.0.0.1:8111 {
+        header_up Host {upstream_hostport}
+        header_up X-Forwarded-Host {host}
+        header_up X-Forwarded-Proto {scheme}
+        header_up X-Forwarded-For {remote}
+
+        transport http {
+            versions 1.1
+            compression off
+        }
+    }
+}
+
+handle_path /netdata/* {
+    reverse_proxy 127.0.0.1:19999
+}
