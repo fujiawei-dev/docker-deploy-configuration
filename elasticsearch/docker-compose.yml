@@ -1,0 +1,21 @@
+version: '3'
+services:
+  elasticsearch:
+    image: elasticsearch:latest
+    container_name: elasticsearch-main
+    restart: always
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - /mnt/ubuntu.old/root/dockerd/elasticsearch/data:/usr/share/elasticsearch/data
+      - /mnt/ubuntu.old/root/dockerd/elasticsearch/logs:/usr/share/elasticsearch/logs
+      - /mnt/ubuntu.old/root/dockerd/elasticsearch/plugins:/usr/share/elasticsearch/plugins
+    ports:
+      - 9200:9200
+      - 9300:9300
