@@ -1,5 +1,19 @@
 # 常用 Docker 容器配置与部署
 
+## 跨平台运行容器
+
+### 列出支持的系统架构
+
+```shell
+docker buildx ls
+```
+
+### 安装支持不同系统架构
+
+```shell
+docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+```
+
 ## Docker 拉取代理设置
 
 ```shell
