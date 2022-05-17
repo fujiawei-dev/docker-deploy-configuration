@@ -1,0 +1,3 @@
+!elastic/docker
+elastic/docker-elk/*
+!elastic/docker-elk/docker-compose.yml
