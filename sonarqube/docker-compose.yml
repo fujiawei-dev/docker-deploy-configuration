@@ -24,3 +24,4 @@ services:
       POSTGRES_PASSWORD: sonar
     volumes:
       - /mnt/ubuntu.old/root/dockerd/sonarqube/postgresql:/var/lib/postgresql
+      - /mnt/ubuntu.old/root/dockerd/sonarqube/postgresql/data:/var/lib/postgresql/data
