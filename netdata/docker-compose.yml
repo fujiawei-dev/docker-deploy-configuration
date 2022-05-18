@@ -1,12 +1,14 @@
 version: '3'
+
 services:
+
   netdata:
     image: netdata/netdata
     container_name: netdata
     hostname: ubuntu-amd64 # set to fqdn of host
+    restart: unless-stopped
     ports:
       - 19999:19999
-    restart: unless-stopped
     cap_add:
       - SYS_PTRACE
     security_opt:
@@ -15,7 +17,6 @@ services:
       - netdataconfig:/etc/netdata
       - netdatalib:/var/lib/netdata
       - netdatacache:/var/cache/netdata
-      - $PWD/netdata.conf:/etc/netdata/netdata.conf
       - /etc/passwd:/host/etc/passwd:ro
       - /etc/group:/host/etc/group:ro
       - /proc:/host/proc:ro
@@ -26,3 +27,6 @@ volumes:
   netdataconfig:
   netdatalib:
   netdatacache:
+    driver_opts:
+     type: tmpfs
+     device: tmpfs
