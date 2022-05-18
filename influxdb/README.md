@@ -1,5 +1,13 @@
 # InfluxDB 存储海量时间序列数据
 
+```shell
+docker network create influxdb
+```
+
+```shell
+docker run -d --name=influxdb --net=influxdb influxdb
+```
+
 ## 基础操作
 
 ```shell
