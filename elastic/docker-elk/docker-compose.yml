@@ -16,7 +16,7 @@ services:
         ELASTIC_VERSION: ${ELASTIC_VERSION}
     init: true
     volumes:
-      - setup:/state:Z
+      - /mnt/ssd/dockerd/elasticsearch/setup:/state:Z
     environment:
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
       LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
@@ -31,7 +31,7 @@ services:
         ELASTIC_VERSION: ${ELASTIC_VERSION}
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
-      - elasticsearch:/usr/share/elasticsearch/data:z
+      - /mnt/ssd/dockerd/elasticsearch/data:/usr/share/elasticsearch/data:z
     ports:
       - "9201:9200"
       - "9301:9300"
@@ -57,8 +57,8 @@ services:
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro,Z
     ports:
       - "5044:5044"
-      - "5000:5000/tcp"
-      - "5000:5000/udp"
+      - "15000:5000/tcp"
+      - "15000:5000/udp"
       - "9600:9600"
     environment:
       LS_JAVA_OPTS: -Xms256m -Xmx256m
@@ -87,7 +87,3 @@ services:
 networks:
   elk:
     driver: bridge
-
-volumes:
-  setup:
-  elasticsearch:
