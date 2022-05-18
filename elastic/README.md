@@ -1,6 +1,8 @@
 # Elastic 产品技术栈
 
-> https://github.com/deviantony/docker-elk
+```shell
+git clone --depth=1 https://github.com/deviantony/docker-elk .
+```
 
 ## Elasticsearch 全文搜索引擎
 

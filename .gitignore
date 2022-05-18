@@ -1,5 +1,12 @@
-!elastic/docker
-elastic/docker-elk/*
-!elastic/docker-elk/docker-compose.yml
+elastic/docker-elk/*.md
+elastic/docker-elk/**/README.md
+elastic/docker-elk/**/Dockerfile
+elastic/docker-elk/.*
+elastic/docker-elk/**/.*
+elastic/docker-elk/**/*.sh
+elastic/docker-elk/**/*.go
+elastic/docker-elk/LICENSE
+elastic/docker-elk/setup/
+!elastic/docker-elk/.env
 
 consul/learn-consul-docker/
