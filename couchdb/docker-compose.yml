@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  db:
+    image: apache/couchdb
+    # restart: unless-stopped
+    volumes:
+      - ./local.d:/opt/couchdb/etc/local.d
+      - /mnt/ssd/dockerd/couchdb/data:/opt/couchdb/data
+      - /mnt/ssd/dockerd/couchdb/log:/opt/couchdb/var/log
+    ports:
+      - "5984:5984"
+    environment:
+      - 'COUCHDB_USER=admin'
+      - 'COUCHDB_PASSWORD=password'
