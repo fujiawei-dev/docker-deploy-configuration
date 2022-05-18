@@ -16,7 +16,7 @@ services:
         ELASTIC_VERSION: ${ELASTIC_VERSION}
     init: true
     volumes:
-      - /mnt/ssd/dockerd/elasticsearch/setup:/state:Z
+      - /mnt/ssd/dockerd/elk/setup:/state:Z
     environment:
       ELASTIC_PASSWORD: ${ELASTIC_PASSWORD:-}
       LOGSTASH_INTERNAL_PASSWORD: ${LOGSTASH_INTERNAL_PASSWORD:-}
@@ -31,11 +31,14 @@ services:
         ELASTIC_VERSION: ${ELASTIC_VERSION}
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
-      - /mnt/ssd/dockerd/elasticsearch/data:/usr/share/elasticsearch/data:z
+      - /mnt/ssd/dockerd/elk/elasticsearch/data:/usr/share/elasticsearch/data:z
+      - /mnt/ssd/dockerd/elk/elasticsearch/logs:/usr/share/elasticsearch/logs
+      - /mnt/ssd/dockerd/elk/elasticsearch/plugins:/usr/share/elasticsearch/plugins
     ports:
       - "9201:9200"
       - "9301:9300"
     environment:
+      TAKE_FILE_OWNERSHIP: true
       ES_JAVA_OPTS: -Xms512m -Xmx512m
       # Bootstrap password.
       # Used to initialize the keystore during the initial startup of
