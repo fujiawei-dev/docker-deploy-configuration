@@ -11,7 +11,7 @@ apt install -y nginx-core
 ## 指定配置文件启动
 
 ```shell
-nginx -c /root/projects/docker-conf/nginx/nginx.conf
+nginx -c /root/projects/docker-deploy-configuration/nginx/nginx.conf
 ```
 
 ## 停止
