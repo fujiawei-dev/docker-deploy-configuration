@@ -1,0 +1,29 @@
+version: "2.1"
+
+services:
+
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+      - TRANSMISSION_WEB_HOME=/transmission-web-control/ #optional
+      # - TRANSMISSION_WEB_HOME= /flood-for-transmission/
+      # - TRANSMISSION_WEB_HOME=/transmissionic/
+      - USER= #optional
+      - PASS= #optional
+      - WHITELIST=iplist #optional
+      - PEERPORT=peerport #optional
+      - HOST_WHITELIST=dnsname list #optional
+    volumes:
+      - ./config/settings.json:/config/settings.json
+      - /mnt/ssd/dockerd/transmission/config:/config
+      - /mnt/ssd/dockerd/transmission/downloads:/downloads
+      - /mnt/ssd/dockerd/transmission/watch:/watch
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
