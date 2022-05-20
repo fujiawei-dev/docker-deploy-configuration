@@ -11,6 +11,7 @@ services:
     image: gitea/gitea:latest
     restart: unless-stopped
     environment:
+      - TZ=Asia/Shanghai
       - USER_UID=1000
       - USER_GID=1000
       - GITEA__database__DB_TYPE=postgres
@@ -23,8 +24,8 @@ services:
     volumes:
       - ./conf.ini:/data/gitea/conf/app.ini
       - /mnt/ssd/dockerd/gitea/data:/data
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
+      # - /etc/timezone:/etc/timezone:ro
+      # - /etc/localtime:/etc/localtime:ro
     ports:
       - "13000:3000"
       - "10022:22"
@@ -37,6 +38,7 @@ services:
     image: postgres:latest
     restart: unless-stopped
     environment:
+      - TZ=Asia/Shanghai
       - POSTGRES_USER=gitea
       - POSTGRES_PASSWORD=gitea
       - POSTGRES_DB=gitea
@@ -44,8 +46,8 @@ services:
       - gitea-postgres
     volumes:
       - /mnt/ssd/dockerd/gitea/postgres:/var/lib/postgresql/data
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
+      # - /etc/timezone:/etc/timezone:ro
+      # - /etc/localtime:/etc/localtime:ro
     ports:
       - 15432:5432
 
@@ -53,11 +55,13 @@ services:
   redis:
     image: redis:latest
     restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
     ports:
       - "16379:6379"
     volumes:
       - /mnt/ssd/dockerd/gitea/redis:/data
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
+      # - /etc/timezone:/etc/timezone:ro
+      # - /etc/localtime:/etc/localtime:ro
     networks:
       - gitea-postgres
