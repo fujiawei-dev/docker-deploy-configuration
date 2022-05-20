@@ -24,8 +24,6 @@ services:
     volumes:
       - ./conf.ini:/data/gitea/conf/app.ini
       - /mnt/ssd/dockerd/gitea/data:/data
-      # - /etc/timezone:/etc/timezone:ro
-      # - /etc/localtime:/etc/localtime:ro
     ports:
       - "13000:3000"
       - "10022:22"
@@ -46,8 +44,6 @@ services:
       - gitea-postgres
     volumes:
       - /mnt/ssd/dockerd/gitea/postgres:/var/lib/postgresql/data
-      # - /etc/timezone:/etc/timezone:ro
-      # - /etc/localtime:/etc/localtime:ro
     ports:
       - 15432:5432
 
@@ -60,8 +56,9 @@ services:
     ports:
       - "16379:6379"
     volumes:
+      - ./redis.conf:/etc/redis/redis.conf
       - /mnt/ssd/dockerd/gitea/redis:/data
-      # - /etc/timezone:/etc/timezone:ro
-      # - /etc/localtime:/etc/localtime:ro
     networks:
       - gitea-postgres
+    command: redis-server /etc/redis/redis.conf
+    privileged: true
