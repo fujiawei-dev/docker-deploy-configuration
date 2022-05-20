@@ -8,14 +8,17 @@ services:
   redis:
     restart: unless-stopped
     image: redis:latest
+    ports:
+      - "6380:6379"
     volumes:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+      - /mnt/ssd/dockerd/docker-registry/redis:/data
     networks:
       - dockerhub
 
   # -----------------------------
-  registry:
+  mirror:
     restart: unless-stopped
     image: registry:latest
     ports:

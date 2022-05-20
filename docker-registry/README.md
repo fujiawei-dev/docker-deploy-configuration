@@ -32,5 +32,5 @@ docker compose up -d
 ## 浏览日志
 
 ```shell
-docker compose logs --tail 50
+docker compose logs --tail 50 -f
 ```
