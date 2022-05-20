@@ -5,6 +5,8 @@ networks:
     external: false
 
 services:
+
+  # ----------------------------------------------
   server:
     image: gitea/gitea:latest
     restart: unless-stopped
@@ -19,19 +21,20 @@ services:
     networks:
       - gitea-postgres
     volumes:
+      - ./conf.ini:/data/gitea/conf/app.ini
       - /mnt/ssd/dockerd/gitea/data:/data
-      - $PWD/conf.ini:/data/gitea/conf/app.ini
-      - $PWD/.gitconfig:/data/git/.gitconfig
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - "13001:3000"
-      - "10023:22"
+      - "13000:3000"
+      - "10022:22"
     depends_on:
       - postgres
+      - redis
 
+  # ----------------------------------------------
   postgres:
-    image: postgres:14
+    image: postgres:latest
     restart: unless-stopped
     environment:
       - POSTGRES_USER=gitea
@@ -41,5 +44,20 @@ services:
       - gitea-postgres
     volumes:
       - /mnt/ssd/dockerd/gitea/postgres:/var/lib/postgresql/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
     ports:
       - 15432:5432
+
+  # ----------------------------------------------
+  redis:
+    image: redis:latest
+    restart: unless-stopped
+    ports:
+      - "16379:6379"
+    volumes:
+      - /mnt/ssd/dockerd/gitea/redis:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - gitea-postgres
