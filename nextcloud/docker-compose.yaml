@@ -43,7 +43,8 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - ADMINER_DEFAULT_DB_DRIVER=mysql
-      - ADMINER_DEFAULT_DB_HOST=mysql:3306
+      - ADMINER_DEFAULT_DB_HOST=mysql
+      - ADMINER_DEFAULT_DB_NAME=nextcloud
       - ADMINER_DESIGN=nette
       - PHP_CLI_MEMORY_LIMIT=1024m
     depends_on:
