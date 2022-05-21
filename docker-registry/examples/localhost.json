@@ -1,0 +1,20 @@
+{
+    "builder": {
+        "gc": {
+            "defaultKeepStorage": "100GB",
+            "enabled": true
+        }
+    },
+    "debug": true,
+    "experimental": true,
+    "features": {
+        "buildkit": true
+    },
+    "log-level": "warn",
+    "insecure-registries": [
+        "127.0.0.1:5000"
+    ],
+    "registry-mirrors": [
+        "http://127.0.0.1:5000"
+    ]
+}

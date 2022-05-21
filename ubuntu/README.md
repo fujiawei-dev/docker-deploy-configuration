@@ -1,6 +1,10 @@
 # Ubuntu 操作系统
 
 ```
+docker run -it --rm ubuntu bash
+```
+
+```
 docker run -i --rm  ubuntu:18.04 /bin/bash -c "ldd --version"
 ```
 
