@@ -6,6 +6,9 @@
 
 ```shell
 apt install -y nginx-core
+
+# openwrt
+opkg install nginx
 ```
 
 ## 指定配置文件启动
