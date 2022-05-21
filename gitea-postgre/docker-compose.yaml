@@ -1,9 +1,5 @@
 version: "3"
 
-networks:
-  gitea-postgres:
-    external: false
-
 services:
 
   # ----------------------------------------------
@@ -15,12 +11,10 @@ services:
       - USER_UID=1000
       - USER_GID=1000
       - GITEA__database__DB_TYPE=postgres
-      - GITEA__database__HOST=172.17.0.1:15432
+      - GITEA__database__HOST=redis:5432
       - GITEA__database__NAME=gitea
       - GITEA__database__USER=gitea
       - GITEA__database__PASSWD=gitea
-    networks:
-      - gitea-postgres
     volumes:
       - ./conf.ini:/data/gitea/conf/app.ini
       - ./ssh_config:/data/gitea/.ssh/config
@@ -41,8 +35,6 @@ services:
       - POSTGRES_USER=gitea
       - POSTGRES_PASSWORD=gitea
       - POSTGRES_DB=gitea
-    networks:
-      - gitea-postgres
     volumes:
       - /mnt/ssd/dockerd/gitea/postgres:/var/lib/postgresql/data
     ports:
@@ -59,8 +51,6 @@ services:
     volumes:
       - ./redis.conf:/etc/redis/redis.conf
       - /mnt/ssd/dockerd/gitea/redis:/data
-    networks:
-      - gitea-postgres
     command: redis-server /etc/redis/redis.conf
 
   # ----------------------------------------------
@@ -71,7 +61,7 @@ services:
       - 18080:8080
     environment:
       - ADMINER_DEFAULT_DB_DRIVER=pgsql
-      - ADMINER_DEFAULT_DB_HOST=172.17.0.1:15432
+      - ADMINER_DEFAULT_DB_HOST=postgres:5432
       - ADMINER_DEFAULT_DB_NAME=gitea
       - ADMINER_DESIGN=nette
       - PHP_CLI_MEMORY_LIMIT=1024m
