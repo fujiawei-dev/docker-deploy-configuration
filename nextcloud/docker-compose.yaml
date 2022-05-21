@@ -17,6 +17,8 @@ services:
       - MYSQL_PASSWORD=root
       - MYSQL_USER=nextcloud
       - MYSQL_DATABASE=nextcloud
+    depends_on:
+      - mysql
 
   # ----------------------------------------------
   mysql:
