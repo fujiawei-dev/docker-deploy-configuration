@@ -12,7 +12,7 @@ services:
       - TZ=Asia/Shanghai
       - PASSWORD=root #optional
       - SUDO_PASSWORD=root #optional
-      - PROXY_DOMAIN=localhost/vscode/ #optional
+      # - PROXY_DOMAIN=localhost/code-server/ #optional
       - DEFAULT_WORKSPACE=/root/projects/docker-deploy-configuration #optional
     volumes:
       - /root:/root

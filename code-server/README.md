@@ -17,3 +17,5 @@ docker-compose down
 
 docker-compose pull # 更新
 ```
+
+反向代理好像不用特别配置。
