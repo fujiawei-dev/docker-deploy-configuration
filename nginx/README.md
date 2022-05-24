@@ -28,3 +28,17 @@ nginx -s stop
 ```shell
 nginx -s reload
 ```
+
+## 修改端口
+
+```shell
+# 输出全部
+sed 's/listen 80/listen 82/;w /tmp/nginx.conf' nginx.conf
+
+# 只输出修改行
+sed 's/listen 80/listen 82/w /tmp/nginx.conf' nginx.conf
+```
+
+```shell
+nginx -c /tmp/nginx.conf
+```
