@@ -10,6 +10,7 @@ services:
       - TZ=Asia/Shanghai
       - TEAMCITY_CONTEXT=teamcity
     volumes:
+      - ./.ssh/config:/opt/teamcity/.ssh/config
       - /mnt/ssd/dockerd/jetbrains/teamcity_server/datadir:/data/teamcity_server/datadir
       - /mnt/ssd/dockerd/jetbrains/teamcity_server/logs:/opt/teamcity/logs
     depends_on:
