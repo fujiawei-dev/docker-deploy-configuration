@@ -17,7 +17,7 @@ services:
       - GITEA__database__PASSWD=gitea
     volumes:
       - ./conf.ini:/data/gitea/conf/app.ini
-      - ./ssh_config:/data/gitea/.ssh/config
+      - ./.ssh/config:/data/gitea/.ssh/config
       - /mnt/ssd/dockerd/gitea/data:/data
     ports:
       - "13000:3000"
