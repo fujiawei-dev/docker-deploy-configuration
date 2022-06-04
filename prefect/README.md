@@ -45,6 +45,8 @@ endpoint = "${server.host}:${server.port}"
 prefect server create-tenant --name main --slug main
 ```
 
+### Agent Local
+
 然后才能启动 agent：
 
 ```shell
@@ -71,6 +73,12 @@ screen -ls
 
 ```shell
 screen -r prefect
+```
+
+### Agent Docker
+
+```shell
+prefect agent docker start --show-flow-logs
 ```
 
 ## 基础操作
