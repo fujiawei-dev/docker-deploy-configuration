@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  server:
+    image: jetbrains/teamcity-server
+    restart: unless-stopped
+    ports:
+      - 18025:8111
+    environment:
+      - TZ=Asia/Shanghai
+      - TEAMCITY_CONTEXT=teamcity
+    volumes:
+      - /mnt/ssd/dockerd/jetbrains/teamcity_server/datadir:/data/teamcity_server/datadir
+      - /mnt/ssd/dockerd/jetbrains/teamcity_server/logs:/opt/teamcity/logs
+    depends_on:
+      - postgres
+
+  # ----------------------------------------------
+  postgres:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
+      - POSTGRES_USER=teamcity
+      - POSTGRES_PASSWORD=teamcity
+      - POSTGRES_DB=teamcity
+    volumes:
+      - /mnt/ssd/dockerd/jetbrains/teamcity_server/postgres:/var/lib/postgresql/data
+    ports:
+      - 18026:5432
+
+  # ----------------------------------------------
+  adminer:
+    image: adminer:latest
+    restart: unless-stopped
+    ports:
+      - 18027:8080
+    environment:
+      - TZ=Asia/Shanghai
+      - ADMINER_DEFAULT_DB_DRIVER=pgsql
+      - ADMINER_DEFAULT_DB_HOST=postgres:5432
+      - ADMINER_DEFAULT_DB_NAME=teamcity
+      - ADMINER_DESIGN=nette
+      - PHP_CLI_MEMORY_LIMIT=1024m
+    depends_on:
+      - postgres
