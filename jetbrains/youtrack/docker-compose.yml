@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  server:
+    image: jetbrains/youtrack:2022.1.46592
+    restart: unless-stopped
+    ports:
+      - 18024:8080
+    volumes:
+      - ./conf:/opt/youtrack/conf
+      - /mnt/ssd/dockerd/jetbrains/youtrack/data:/opt/youtrack/data
+      - /mnt/ssd/dockerd/jetbrains/youtrack/logs:/opt/youtrack/logs
+      - /mnt/ssd/dockerd/jetbrains/youtrack/backups:/opt/youtrack/backups

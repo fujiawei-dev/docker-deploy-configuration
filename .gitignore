@@ -10,3 +10,5 @@ elastic/docker-elk/setup/
 !elastic/docker-elk/.env
 
 consul/learn-consul-docker/
+
+jetbrains/youtrack/conf/*
