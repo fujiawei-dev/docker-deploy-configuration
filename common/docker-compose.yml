@@ -15,3 +15,5 @@ services:
     volumes:
       - ./config/redis.conf:/etc/redis/redis.conf
       - /mnt/ssd/dockerd/redis:/data
+    networks:
+      - public-servers
