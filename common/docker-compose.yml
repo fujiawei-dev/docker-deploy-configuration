@@ -2,6 +2,7 @@ version: '3'
 
 networks:
   public-servers:
+    external: true
 
 services:
 
