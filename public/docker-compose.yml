@@ -14,6 +14,16 @@ services:
       - "6379:6379"
     volumes:
       - ./config/redis.conf:/etc/redis/redis.conf
-      - /mnt/ssd/dockerd/redis:/data
+      - /mnt/ssd/dockerd/public/redis:/data
+    networks:
+      - public-servers
+
+  mongo:
+    image: mongo:4
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - /mnt/ssd/dockerd/public/mongo:/data
     networks:
       - public-servers
