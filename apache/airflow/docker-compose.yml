@@ -49,6 +49,10 @@ services:
 
   redis:
     image: redis:latest
+    volumes:
+      - ./redis.conf:/etc/redis/redis.conf
+      - /mnt/ssd/dockerd/airflow/redis:/data
+    command: redis-server /etc/redis/redis.conf
     expose:
       - 6379
     healthcheck:
