@@ -34,8 +34,6 @@ services:
     ports:
       - 3306:3306
     volumes:
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
       - /mnt/ssd/dockerd/public/mariadb:/var/lib/mysql
     environment:
       MARIADB_ROOT_PASSWORD: root
